@@ -1,0 +1,37 @@
+<view class="">
+  <!-- 标签 -->
+  <view class="fb_content">
+    <view class="fb_tit">问题的种类</view>
+    <view class="fb_box">
+      <view class="fb_item {{fbIndex===index?'isActive':''}}" 
+        wx:for="{{fbList}}"
+        wx:key="id"
+        data-index="{{index}}"
+        bind:tap="handleFbIndex"
+      >
+        {{item.text}}
+      </view>
+    </view>
+  </view>
+  <!-- 内容 -->
+  <view class="fb_input_box">
+    <textarea class="fb_textarea" value="{{textareaValue}}" bind:input="textareaInput" placeholder="请描述一下您的问题"></textarea>
+    <view class="imgList">
+      <button class="upload" bind:tap="handleUploadImg" size="default">+</button>
+      <view class="uploadItem"
+        wx:for="{{tempFilePaths}}"
+        wx:key="index"
+      >
+        <view class="uploadItemImg">
+          <image mode="widthFix" src="{{item}}"></image>
+        </view>
+        <view class="close" bind:tap="handleDelete" data-index="{{index}}">x</view>
+      </view>
+    </view>
+  </view>
+  <view class="form_btn">
+    <button class="default" size="mini" type="warn" bind:tap="submit">
+      提交
+    </button>
+  </view>
+</view>

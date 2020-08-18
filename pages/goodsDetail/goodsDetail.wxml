@@ -1,0 +1,59 @@
+<view class="goodsDetail">
+  <!-- 轮播图 -->
+  <swiper class="swiper" indicator-dots autoplay circular>
+    <swiper-item
+      wx:for="{{goodsList}}"
+      bind:tap="handleGoodsList"
+      wx:key="pics_id"
+      data-index="{{index}}"
+      >
+      <image class="" src="{{item.pics_mid}}" mode=""></image>
+    </swiper-item>
+  </swiper>
+  <view class="price">￥ {{goodsData.goods_price}}</view>
+  <view class="detailBox">
+    <view class="title">{{goodsData.goods_name}}</view>
+    <view class="collect" bind:tap="handleCollect">
+      <view class="image">
+        <image class="" src="{{collectState ? '../../static/img/shouchang.png' : '../../static/img/collect.png'}}" mode="widthFix"></image>
+      </view>
+      <view class="collectionText">
+        收藏
+      </view>
+    </view>
+  </view>
+  <view class="imgTextTle">
+    图文详情
+  </view>
+  <view class="line"></view>
+  <rich-text nodes="{{goodsData.goods_introduce}}"></rich-text>
+
+  <!-- 回到顶部 -->
+  <scrollTop wx:if="{{scroTopHidden}}" bind:handleVBtn="handleVBtn"></scrollTop>
+
+  <view class="btmBox">
+    <view class="btmService" bind:tap="handleClick" data-text="客服">
+      <text class="iconfont icon-lianxikefu"></text>
+      客服
+      <button open-type="contact"></button>
+    </view>
+    <view class="btmShare">
+      <text class="iconfont icon-fenxiang"></text>
+      <button class="btnShareItem" open-type="share" plain bind:tap="handleClick" data-text="分享">
+        分享
+      </button>
+    </view>
+    <view class="btmShopping">
+      <text class="iconfont icon-gouwuche"></text>
+      <navigator url="/pages/shopping/shopping" open-type="switchTab">
+        购物车
+      </navigator>
+    </view>
+    <view class="addShopping" bind:tap="handleCartAdd">
+      加入购物车
+    </view>
+    <view class="immediately" bind:tap="handlePay">
+      立即购买
+    </view>
+  </view>
+</view>

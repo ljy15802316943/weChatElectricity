@@ -1,0 +1,78 @@
+<view class="shopping">
+  <view class="shippingAddress" wx:if="{{!CartData.userName}}">
+    <button  type="primary" plain bind:tap="handleAddress">
+      获取收货地址
+    </button>
+  </view>
+  <view wx:else class="address" >
+    <view class="name">
+      <text >{{CartData.userName}}</text>
+      <text >{{CartData.address}}</text>
+    </view>
+    <view class="pbone">
+      {{CartData.phone}}
+    </view>
+  </view>
+
+  <view class="carTitle">购物车</view>
+
+  <!-- 购物车列表 -->
+  <view class="carGroup"
+    wx:for="{{cart}}"
+    wx:key="goods_id"
+    wx:if="{{cart.length>=1}}"
+  >
+    <checkbox-group data-goodsId="{{item.goods_id}}" bindchange="checkboxChange">
+      <checkbox class="" checked="{{item.checkbox}}" value=""></checkbox>
+    </checkbox-group>
+    <view class="carsImg" hover-class="none" hover-stop-propagation="false">
+      <image src="{{item.goods_big_logo}}"></image>
+    </view>
+    <view class="bomGroup" hover-class="none" hover-stop-propagation="false">
+      <h3>{{item.goods_name}}</h3>
+      <view class="carIndexBox" hover-class="none" hover-stop-propagation="false">
+        <view class="catItemPrice">￥{{item.goods_price}}</view>
+        <view class="carIndex">
+          <view class="subtract" data-operation="-"  data-goodsId="{{item.goods_id}}" bind:tap="handleNum">
+            -
+          </view>
+          <view class="amount">
+            {{item.num}}
+          </view>
+          <view class="add"  data-operation="+"  data-goodsId="{{item.goods_id}}" bind:tap="handleNum">
+            +
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="" wx:if="{{cart.length<1}}">
+    <image mode="widthFix" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595780049121&di=9e7fde3a9bfc7e0057927937f42a1ec4&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fe1b1467beea0a9c7d6a56b32bac6d7e5dcd914f7c3e6-YTwUd6_fw658" />
+  </view>
+
+  <!-- 底部应用栏 -->
+  <view class="bomBox">
+    <view class="checkboxAll" hover-class="none" hover-stop-propagation="false">
+      <checkbox-group class="" bindchange="handleCheckAll">
+        <checkbox class="" disabled="{{disabled}}" checked="{{jieSuan.checkAll}}" value=""></checkbox>全选
+      </checkbox-group>
+    </view>
+    <view class="indexCenter">
+      <view class="top">
+        <view class="text">
+          合计：
+        </view>
+        <view class="jine" hover-class="none" hover-stop-propagation="false">
+          ￥{{jieSuan.allPrice}}
+        </view>
+      </view>
+      <view class="bottom">
+        包含运费
+      </view>
+    </view>
+    <view class="jiesuan" bind:tap="handlePay">
+      结算({{jieSuan.allNum}})
+    </view>
+  </view>
+</view>
